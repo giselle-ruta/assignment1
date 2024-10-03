@@ -1,0 +1,29 @@
+
+ID:25143
+-------
+Name:Tuyinganyiki giselle
+
+-- CREATE PLUGGABLE DATABASE
+CREATE PLUGGABLE DATABASE tu_plsqlauca
+ADMIN USER tuyinganyiki IDENTIFIED BY tuyinganyiki
+FILE_NAME_CONVERT = ('C:\app\lyal\product\21c\oradata\XE\pdbseed', 'C:\plsql\pdbs\tu_plsqlauca');
+
+-- OPEN NEWLY CREATED PLUGGABLE DATABASE -- ED_PLSQLAUCA
+ALTER PLUGGABLE DATABASE tu_plsqlauca OPEN;
+
+
+-- CREATE NEW PLUGGABLE DATABASE FOR DEMONSTRATING DELETION
+CREATE PLUGGABLE DATABASE tu_to_delete_pdb
+ADMIN USER tuyinganyiki IDENTIFIED BY tuyinganyiki
+FILE_NAME_CONVERT = ('C:\app\lyal\product\21c\oradata\XE\pdbseed', 'C:\plsql\pdbs\tu_to_delete_pdb');
+
+
+-- CLOSE NEWLY CREATED PLUGGABLE DATABASE BEFORE DELETING
+ALTER PLUGGABLE DATABASE tu_to_delete_pdb CLOSE IMMEDIATE;
+
+-- UNPLUG DATABASE BEFORE DROPPING IT
+ALTER PLUGGABLE DATABASE tu_to_delete_pdb UNPLUG INTO 'C:\plsql\pdbs\TU_TO_DELETE_PDB/tu_to_delete_pdb.xml';
+
+
+-- DROP DATABASE FROM SERVER
+DROP PLUGGABLE DATABASE tu_to_delete_pdb INCLUDING DATAFILES;
